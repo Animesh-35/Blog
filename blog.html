@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Smart Saver: Personal Finance Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Global Styles & Reset --- */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Very light gray background */
+            color: #343a40; /* Dark text */
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1E40AF; /* Primary link color (Deep Blue) */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #153282;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* --- Header Styling --- */
+        .main-header {
+            background-color: #1E40AF; /* Deep Blue header background */
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        .main-header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        /* --- Main Content (Blog Posts) --- */
+        .blog-posts {
+            flex: 3;
+        }
+
+        .post {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #10B981; /* Green accent border (Growth) */
+        }
+        
+        /* Separate style for the featured post structure */
+        .featured-post {
+            border-left-color: #FBBF24; /* Gold accent for featured */
+        }
+
+        .post-header-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .post h2 {
+            color: #1E40AF;
+            margin-top: 0;
+            font-size: 2em;
+        }
+
+        .post-meta {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #10B981;
+        }
+
+        /* --- Tags Styling --- */
+        .tags span {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 4px 10px;
+            margin: 5px 5px 0 0;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+        
+        /* --- Sidebar Styling (Categories & Tags) --- */
+        .sidebar {
+            flex: 1;
+        }
+
+        .sidebar-widget {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-widget h3 {
+            border-bottom: 3px solid #10B981; /* Green accent */
+            padding-bottom: 10px;
+            margin-top: 0;
+            color: #1E40AF;
+        }
+
+        .categories-widget ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .categories-widget li a {
+            display: block;
+            padding: 8px 0;
+            border-bottom: 1px dotted #dee2e6;
+        }
+        
+        /* Tag Cloud Styling in Sidebar */
+        .tag-cloud a {
+            display: inline-block;
+            background-color: #F0FDF4; /* Very light green */
+            color: #065F46;
+            padding: 5px 10px;
+            margin: 5px 5px 5px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 1px solid #D1FAE5;
+        }
+
+        /* --- Commenting System (Static) --- */
+        .commenting-system {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid #1E40AF;
+        }
+
+        .note {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 15px;
+            border: 1px solid #fde68a;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .comment-form input[type="text"],
+        .comment-form input[type="email"],
+        .comment-form textarea {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .submit-button {
+            background-color: #10B981; /* Green button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #0c8a5c;
+        }
+
+        .comment {
+            border: 1px solid #e9ecef;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1E40AF;
+        }
+
+        .comment-date {
+            font-weight: normal;
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-left: 10px;
+        }
+
+        /* --- Footer Styling --- */
+        .main-footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #343a40; /* Dark footer */
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* --- Responsive Design (Mobile Adjustments) --- */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; 
+            }
+            .blog-posts, .sidebar {
+                flex: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>💰 The Smart Saver</h1>
+        <p>Actionable advice for building wealth and financial freedom.</p>
+    </header>
+
+    <div class="container">
+        <main class="blog-posts">
+            <article class="post featured-post">
+                <img src="https://static01.nyt.com/images/2019/01/17/technology/personaltech/17TECHTIP_04/17TECHTIP_04-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="A stylized spreadsheet showing a budget" class="post-header-image">
+                <h2>The 50/30/20 Rule: The Only Budget You Need</h2>
+                <p class="post-meta">
+                    Published on **October 30, 2025** | Category: **Budgeting & Saving**
+                </p>
+                <p>Forget complicated spreadsheets! The **50/30/20 rule** is a simple guideline for budgeting your money: 50% for Needs, 30% for Wants, and 20% for Saving and Debt. We break down exactly how to implement it today...</p>
+                <a href="#post-details-1" class="read-more">Read the Full Guide →</a>
+                <div class="tags">
+                    <span>#quick-tips</span> <span>#budgeting</span> <span>#saving</span>
+                </div>
+            </article>
+
+            <article class="post">
+                <img src="https://media.istockphoto.com/id/870927578/vector/laptop-illustration-with-financial-charts-and-graphs-screen.jpg?s=612x612&w=0&k=20&c=fJCKHLMWKtCi46UzEmCsPvN2Cf12bn8meP8GBhRP26c=" alt="A laptop showing a stock market chart" class="post-header-image" style="height: 180px;">
+                <h2>Investing 101: Why You Need a Roth IRA Now</h2>
+                <p class="post-meta">
+                    Published on **October 25, 2025** | Category: **Investing 101**
+                </p>
+                <p>If you're under 40, the **Roth IRA** is one of the most powerful retirement vehicles available. Learn how tax-free growth works and why starting early is the key to maximizing your returns...</p>
+                <a href="#post-details-2" class="read-more">Read More →</a>
+                <div class="tags">
+                    <span>#roth-ira</span> <span>#beginner-investing</span> <span>#retirement</span>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <section class="sidebar-widget categories-widget">
+                <h3>📂 Categories</h3>
+                <ul>
+                    <li><a href="#">Budgeting & Saving (12)</a></li>
+                    <li><a href="#">Investing 101 (8)</a></li>
+                    <li><a href="#">Debt Management (6)</a></li>
+                    <li><a href="#">Financial Mindset (4)</a></li>
+                </ul>
+            </section>
+
+            <section class="sidebar-widget tags-widget">
+                <h3>🏷️ Popular Tags</h3>
+                <div class="tag-cloud">
+                    <a href="#">#quick-tips</a>
+                    <a href="#">#credit-score</a>
+                    <a href="#">#roth-ira</a>
+                    <a href="#">#student-loans</a>
+                    <a href="#">#emergency-fund</a>
+                    <a href="#">#passive-income</a>
+                    <a href="#">#beginner-investing</a>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <section class="commenting-system">
+        <h2>💬 Join the Discussion</h2>
+        <p class="note">**Important:** This is an HTML/CSS demonstration. Your comment will **not** be saved without a backend system or JavaScript.</p>
+        <form class="comment-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email (Private)" required>
+            <textarea placeholder="Share your thoughts or questions..." rows="5" required></textarea>
+            <button type="submit" class="submit-button">Post Comment</button>
+        </form>
+
+        <div class="existing-comments">
+            <h3>3 Comments</h3>
+            <div class="comment">
+                <p class="comment-author">**Sarah W.** <span class="comment-date">Nov 1, 2025</span></p>
+                <p>The 50/30/20 rule really simplified my life. Great article!</p>
+            </div>
+            <div class="comment">
+                <p class="comment-author">**David M.** <span class="comment-date">Oct 28, 2025</span></p>
+                <p>I wish I had started my Roth IRA earlier. Thanks for the breakdown!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 The Smart Saver. Financial Knowledge for Everyone.</p>
+    </footer>
+
+</body>
+</html>
